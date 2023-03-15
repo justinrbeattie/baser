@@ -1,0 +1,67 @@
+.drawer-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background:rgba(0,0,0,calc(.25 * var(--intersection-ratio)));
+  filter: drop-shadow(0 0 0.75rem rgba(0,0,0,0.25));
+  pointer-events: none;
+  transition: all ease-in-out .5s;
+}
+
+
+.drawer-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  background: transparent;
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  gap: 1px;
+  --clip-start-point: calc(100vh - 64px);
+  --clip-progress: calc(var(--clip-start-point) - (var(--clip-start-point) * var(--intersection-ratio)));
+  --clip-progress-max: max(64px, var(--clip-progress));
+  clip-path: inset(var(--clip-progress-max) 10vw 0 10vw round 16px 16px 0px 0px);
+  pointer-events: auto;
+
+}
+
+.drawer-inner:before {
+  content: '';
+  width: 100vw;
+  min-height: calc(100vh - var(--top-nav-height));
+  scroll-snap-align: start;
+}
+
+.drawer-inner dialog {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  pointer-events: auto;
+  min-width: 80vw;
+  min-height: calc(100vh - var(--top-nav-height));
+  scroll-snap-align: start;
+  padding: 0px 1rem;
+  border-radius: 0;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+.drawer-inner dialog[open] {
+  display: flex;
+}
+
+.drawer-inner dialog header {
+  display: flex;
+  width: 100%;
+  min-height: var(--top-nav-height);
+}
+
+
+.drawer-inner dialog iframe {
+  width: 100%;
+  min-height: calc(100vh - (var(--top-nav-height) * 2));
+}

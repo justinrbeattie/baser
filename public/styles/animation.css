@@ -1,0 +1,16 @@
+
+.content {
+    opacity:0;
+    transition:opacity .25s cubic-bezier(0.6, -0.28, 0.735, 0.045)
+  }
+  
+  .animation-progress-25 [trigger*='progress-25'] {
+
+    &[trigger*='slide-in-up'] {
+        opacity:1;
+        animation:
+          var(--animation-slide-in-up);
+        animation-timing-function: var(--ease-squish-3);
+        animation-duration: .25s;
+    }
+  }

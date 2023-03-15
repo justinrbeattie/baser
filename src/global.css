@@ -1,0 +1,64 @@
+@import "open-props/postcss/style";
+@import "open-props/postcss/normalize";
+@import "open-props/postcss/buttons";
+@import "../public/styles/page.css";
+
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url("../fonts/Inter-roman.var.woff2") format("woff2");
+}
+
+:root {
+  --page-width: 100vw;
+  --page-height: 100vh;
+  --top-nav-height: 64px;
+  --bottom-nav-height: 64px;
+}
+
+html {
+  font-family: 'Inter';
+  width: var(--page-width);
+  height: var(--page-height);
+}
+
+body {
+  display: grid;
+  width: var(--page-width);
+  grid-template-columns: 1fr;
+  grid-template-rows:
+    auto auto auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  margin: 0;
+  position: relative;
+  padding: 0;
+  background-color:var(--surface-1);
+}
+
+
+header {
+  grid-area: header;
+}
+
+
+
+
+main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: column;
+}
+
