@@ -74,13 +74,6 @@ ul::-webkit-scrollbar {
   transform: scale(0);
 }
 
-@media (any-pointer: coarse) {
-  .pagination {
-    display:none;
-  }
-}
-
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -90,13 +83,14 @@ ul::-webkit-scrollbar {
   width: inherit;
   gap: var(--size-4);
   padding: var(--size-2) 0;
+  overflow-x:auto;
 
 }
 
 .pagination button {
+  min-width: var(--size-3);
   width: var(--size-3);
   height: var(--size-3);
-  min-width: unset;
   padding: 0;
   border-radius: var(--size-3);
   background-color: currentcolor;
