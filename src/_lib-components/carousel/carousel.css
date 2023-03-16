@@ -74,6 +74,13 @@ ul::-webkit-scrollbar {
   transform: scale(0);
 }
 
+@media (any-pointer: coarse) {
+  .pagination {
+    display:none;
+  }
+}
+
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -81,7 +88,7 @@ ul::-webkit-scrollbar {
   position: absolute;
   bottom: 0;
   width: inherit;
-  gap: var(--size-fluid-1);
+  gap: var(--size-4);
   padding: var(--size-2) 0;
 
 }
@@ -96,7 +103,7 @@ ul::-webkit-scrollbar {
   border-color: currentColor;
   border-width: 1px;
   opacity: .25;
-  transform:scale(.7);
+  transform:scale(.75);
   transition: all 1s var(--ease-elastic-1);
 }
 
