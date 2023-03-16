@@ -96,9 +96,9 @@ ul::-webkit-scrollbar {
   border-color: currentColor;
   border-width: 1px;
   opacity: .5;
+  transition: all 1s var(--ease-elastic-1);
 }
 
 .pagination button[aria-expanded="true"] {
   background-color: currentcolor;
-  border-color: transparent;
 }
