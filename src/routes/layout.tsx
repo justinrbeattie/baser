@@ -1,18 +1,14 @@
 import { component$, Slot, useStore, useTask$, useVisibleTask$ } from '@builder.io/qwik';
-import { routeLoader$, useLocation } from '@builder.io/qwik-city';
+import { useLocation } from '@builder.io/qwik-city';
+import BottomNav from '~/components/bottom-nav/bottom-nav';
+import Footer from '~/components/footer/footer';
 
 import Header from '../components/header/header';
 
-export const useServerTimeLoader = routeLoader$(() => {
-  return {
-    date: new Date().toISOString(),
-  };
-});
 
 
 
 export default component$(() => {
-  const serverTime = useServerTimeLoader();
   const location = useLocation();
   const store = useStore<RouteLevelStore>({
     iframe: false,
@@ -40,24 +36,23 @@ export default component$(() => {
 
   return (
     <>
-      {store.iframe ? '' : <Header />}
-      <main>
-        <Slot />
-      </main>
+      {store.iframe ?
+        <main>
+          <Slot />
+        </main>
+        : <><Header />
+          <main>
+            <Slot />
+          </main>
 
-      {store.iframe ? '' :
+          <Footer></Footer>
 
-        <footer>
-          <a href="https://www.builder.io/" target="_blank">
-            Made with ♡ by Builder.io
-            <div>{serverTime.value.date}</div>
-          </a>
-        </footer>
+          <BottomNav></BottomNav>
+
+        </>
 
       }
-
-     {/*  <Drawer store={store} ></Drawer> */}
-
+      {/*             <Drawer store={store} ></Drawer>  */}
     </>
   );
 });

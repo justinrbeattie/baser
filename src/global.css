@@ -16,37 +16,31 @@
 :root {
   --page-width: 100vw;
   --page-height: 100vh;
-  --top-nav-height: 64px;
-  --bottom-nav-height: 64px;
+  --top-nav-height: clamp(2.5rem, 8vh, 4rem);
+  --bottom-nav-height: clamp(2.5rem, 8vh, 4rem);
 }
 
 html {
   font-family: 'Inter';
-  width: var(--page-width);
-  height: var(--page-height);
+  max-width: var(--page-width);
 }
 
 body {
   display: grid;
-  width: var(--page-width);
+  max-width: var(--page-width);
   grid-template-columns: 1fr;
   grid-template-rows:
-    auto auto auto;
+    var(--top-nav-height) auto auto var(--bottom-nav-height);
   grid-template-areas:
     "header"
     "main"
-    "footer";
+    "footer"
+    "bottom-nav";
   margin: 0;
   position: relative;
   padding: 0;
   background-color:var(--surface-1);
 }
-
-
-header {
-  grid-area: header;
-}
-
 
 
 
@@ -56,9 +50,13 @@ main {
   flex-direction: column;
 }
 
-footer {
-  grid-area: footer;
-  display: flex;
-  flex-direction: column;
+a {
+  padding:unset;
+  margin:unset;
 }
 
+
+:focus-visible {
+  outline-color: var(--brand, var(--link));
+  outline-offset: 1px;
+}

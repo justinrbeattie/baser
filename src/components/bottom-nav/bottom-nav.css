@@ -1,0 +1,10 @@
+aside[bottom-nav] {
+    grid-area: bottom-nav;
+    display: flex;
+    flex-direction: column;
+    position:sticky;
+    bottom:0;
+    background:red;
+    max-width: var(--page-width);
+  }
+  

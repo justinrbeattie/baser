@@ -1,4 +1,10 @@
 header {
+  grid-area: header;
+  position:sticky;
+  top:0;
+  max-width: var(--page-width);
+}
+header {
   display: flex;
   background: white;
   border-bottom: 10px solid var(--qwik-dark-purple);

@@ -1,11 +1,12 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { Link } from '@builder.io/qwik-city';
+import { Carousel } from '~/_lib-components/carousel/carousel';
 
 export default component$(() => {
   return (
     <div>
-      <h1>
+{/*       <h1>
         Welcome to Qwik <span class="lightning">⚡️</span>
       </h1>
 
@@ -138,12 +139,104 @@ export default component$(() => {
           </a>
         </li>
       </ul>
+      <h2>Community</h2>
+
+<ul>
+  <li>
+    <span>Questions or just want to say hi? </span>
+    <a href="https://qwik.builder.io/chat" target="_blank">
+      Chat on discord!
+    </a>
+  </li>
+  <li>
+    <span>Follow </span>
+    <a href="https://twitter.com/QwikDev" target="_blank">
+      @QwikDev
+    </a>
+    <span> on Twitter</span>
+  </li>
+  <li>
+    <span>Open issues and contribute on </span>
+    <a href="https://github.com/BuilderIO/qwik" target="_blank">
+      GitHub
+    </a>
+  </li>
+  <li>
+    <span>Watch </span>
+    <a href="https://qwik.builder.io/media/" target="_blank">
+      Presentations, Podcasts, Videos, etc.
+    </a>
+  </li>
+</ul>
+
+<h2>Community</h2>
+
+<ul>
+  <li>
+    <span>Questions or just want to say hi? </span>
+    <a href="https://qwik.builder.io/chat" target="_blank">
+      Chat on discord!
+    </a>
+  </li>
+  <li>
+    <span>Follow </span>
+    <a href="https://twitter.com/QwikDev" target="_blank">
+      @QwikDev
+    </a>
+    <span> on Twitter</span>
+  </li>
+  <li>
+    <span>Open issues and contribute on </span>
+    <a href="https://github.com/BuilderIO/qwik" target="_blank">
+      GitHub
+    </a>
+  </li>
+  <li>
+    <span>Watch </span>
+    <a href="https://qwik.builder.io/media/" target="_blank">
+      Presentations, Podcasts, Videos, etc.
+    </a>
+  </li>
+</ul>
+<h2>Community</h2>
+
+<ul>
+  <li>
+    <span>Questions or just want to say hi? </span>
+    <a href="https://qwik.builder.io/chat" target="_blank">
+      Chat on discord!
+    </a>
+  </li>
+  <li>
+    <span>Follow </span>
+    <a href="https://twitter.com/QwikDev" target="_blank">
+      @QwikDev
+    </a>
+    <span> on Twitter</span>
+  </li>
+  <li>
+    <span>Open issues and contribute on </span>
+    <a href="https://github.com/BuilderIO/qwik" target="_blank">
+      GitHub
+    </a>
+  </li>
+  <li>
+    <span>Watch </span>
+    <a href="https://qwik.builder.io/media/" target="_blank">
+      Presentations, Podcasts, Videos, etc.
+    </a>
+  </li>
+</ul>
       <Link class="mindblow" href="/flower/">
         Blow my mind 🤯
       </Link>
       <Link class="todolist" href="/todolist/">
         TODO demo 📝
-      </Link>
+      </Link> */}
+
+      <Carousel></Carousel>
+
+
     </div>
   );
 });
