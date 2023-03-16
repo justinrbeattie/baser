@@ -1,5 +1,5 @@
 .carousel {
-  width:100%;
+  width: 100%;
   max-width: var(--page-width);
   background: inherit;
   display: flex;
@@ -7,7 +7,11 @@
   flex-flow: row nowrap;
   position: relative;
   --carousel-gap: var(--size-fluid-3);
-padding-bottom:var(--size-5);
+
+}
+
+.carousel:has(nav) {
+  padding-bottom: var(--size-7);
 }
 
 ul {
@@ -52,7 +56,7 @@ ul::-webkit-scrollbar {
   text-shadow: none;
   font-size: var(--size-fluid-3);
   z-index: var(--layer-1);
-  transform:scale(1);
+  transform: scale(1);
   transition: all 1s var(--ease-elastic-1);
 }
 
@@ -60,41 +64,41 @@ ul::-webkit-scrollbar {
   left: 0;
 }
 
-.flipper[title="Next Item"]  {
+.flipper[title="Next Item"] {
   right: 0;
 }
 
 .flipper.hidden {
   opacity: 0;
   pointer-events: none;
-  transform:scale(0);
+  transform: scale(0);
 }
 
 .pagination {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: flex-end;
-  position:absolute;
+  position: absolute;
   bottom: 0;
-  width:inherit;
-  gap:var(--size-fluid-1);
-  padding: var(--size-1) 0;
-  
+  width: inherit;
+  gap: var(--size-fluid-1);
+  padding: var(--size-2) 0;
+
 }
 
 .pagination button {
-  width:var(--size-3);
-  height:var(--size-3);
+  width: var(--size-3);
+  height: var(--size-3);
   min-width: unset;
-  padding:0;
+  padding: 0;
   border-radius: var(--size-3);
-  background-color:transparent;
+  background-color: transparent;
   border-color: currentColor;
-  border-width:1px;
+  border-width: 1px;
   opacity: .5;
 }
 
 .pagination button[aria-expanded="true"] {
-  background-color:currentcolor;
+  background-color: currentcolor;
   border-color: transparent;
 }

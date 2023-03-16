@@ -11,7 +11,8 @@ export const Carousel = component$(() => {
         defaultItemHeight: '500px',
         scrolledToStart: true,
         scrolledToEnd: false,
-        trackPercentage: true,
+        scrollTimelineTracking: true,
+        showTabNavigation: true,
         carouselItemList: [
             {
                 'aria-label': 'item',
@@ -134,14 +135,14 @@ export const Carousel = component$(() => {
     }, { recursive: true });
     useStylesScoped$(styles);
     useTask$(({ track }) => {
-        if (store.trackPercentage) {
+        if (store.scrollTimelineTracking) {
             track(() => store.carouselItemList.map(item => item.intersectionRatio));
             trackVisible(store, carouselRef.value);
-            trackPercentage(store, carouselRef.value);
+            scrollTimelineTracking(store, carouselRef.value);
         } else {
             track(() => store.carouselItemList.map(item => item.fullyVisible));
             trackVisible(store, carouselRef.value);
-            trackPercentage(store, carouselRef.value);
+            scrollTimelineTracking(store, carouselRef.value);
         }
 
     });
@@ -183,27 +184,30 @@ export const Carousel = component$(() => {
                 <i class="las la-angle-right">R</i>
             </button>
 
-            <nav class="pagination" role="tablist" aria-multiselectable>
-                {store.carouselItemList.map((carouselItem) =>
-                    <button
-                        class="pagination-item"
-                        type="button"
-                        role="tab"
-                        id={'tab-' + (carouselItem.index + 1)}
-                        aria-controls={'tabpanel-' + (carouselItem.index + 1)}
-                        title={'Item ' + (carouselItem.index + 1) + ': ' + carouselItem['aria-label']}
-                        aria-label={carouselItem['aria-label']}
-                        aria-setsize={carouselItem.totalItems}
-                        aria-posinset={carouselItem.index + 1}
-                        aria-expanded={carouselItem.fullyVisible}
-                        onClick$={() => { navigateToIndex(carouselItem.index, carouselRef.value) }}
-                        /* @ts-ignore */
-                        tabindex="-1"
-                    ></button>
+            {store.showTabNavigation ?
+                <nav class="pagination" role="tablist" aria-multiselectable>
+                    {store.carouselItemList.map((carouselItem) =>
+                        <button
+                            class="pagination-item"
+                            type="button"
+                            role="tab"
+                            id={'tab-' + (carouselItem.index + 1)}
+                            aria-controls={'tabpanel-' + (carouselItem.index + 1)}
+                            title={'Item ' + (carouselItem.index + 1) + ': ' + carouselItem['aria-label']}
+                            aria-label={carouselItem['aria-label']}
+                            aria-setsize={carouselItem.totalItems}
+                            aria-posinset={carouselItem.index + 1}
+                            aria-expanded={carouselItem.fullyVisible}
+                            onClick$={() => { navigateToIndex(carouselItem.index, carouselRef.value) }}
+                            /* @ts-ignore */
+                            tabindex="-1"
+                        ></button>
 
-                )}
+                    )}
 
-            </nav>
+                </nav>
+                : ''}
+
 
         </div>
     );
@@ -258,7 +262,7 @@ const trackVisible = (store: CarouselStore, carousel: Element | undefined) => {
 
 }
 
-const trackPercentage = (store: CarouselStore, carousel: Element | undefined) => {
+const scrollTimelineTracking = (store: CarouselStore, carousel: Element | undefined) => {
     if (carousel) {
         store.carouselItemList.forEach((item, i) => {
             const element = carousel?.querySelector('ul')?.children[i];
@@ -284,7 +288,8 @@ export interface CarouselStore {
     carouselItemList: CarouselItemStore[];
     defaultItemWidth: string;
     defaultItemHeight: string;
-    trackPercentage: boolean;
+    scrollTimelineTracking: boolean;
+    showTabNavigation: boolean;
 }
 
 export interface CarouselItemStore {
