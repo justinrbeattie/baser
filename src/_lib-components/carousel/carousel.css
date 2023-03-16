@@ -92,13 +92,15 @@ ul::-webkit-scrollbar {
   min-width: unset;
   padding: 0;
   border-radius: var(--size-3);
-  background-color: transparent;
+  background-color: currentcolor;
   border-color: currentColor;
   border-width: 1px;
-  opacity: .5;
+  opacity: .25;
+  transform:scale(.7);
   transition: all 1s var(--ease-elastic-1);
 }
 
 .pagination button[aria-expanded="true"] {
-  background-color: currentcolor;
+  opacity: .6;
+  transform:scale(1);
 }
