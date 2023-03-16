@@ -1,6 +1,9 @@
 import { component$, useSignal, useStore, useStylesScoped$, useTask$ } from '@builder.io/qwik';
 import { CarouselItem } from './carousel-item/carousel-item';
 import styles from './carousel.css?inline';
+import { InNavArrowLeft, InNavArrowRight } from "@qwikest/icons/iconoir";
+import { Icon } from '../icon/icon';
+
 
 export const Carousel = component$(() => {
     const carouselRef = useSignal<Element>();
@@ -162,7 +165,9 @@ export const Carousel = component$(() => {
                 disabled={store.scrolledToStart}
                 class={store.scrolledToStart ? 'flipper hidden' : 'flipper visible'}
                 onClick$={() => { navigateDirection('previous', carouselRef.value); }}>
-                <i class="las la-angle-left">L</i>
+                          <Icon aria-hidden="true">
+                    <InNavArrowLeft/>
+                </Icon>
             </button>
             <ul class="scroll-container"
                 /* @ts-ignore */
@@ -181,7 +186,9 @@ export const Carousel = component$(() => {
                 disabled={store.scrolledToEnd}
                 class={store.scrolledToEnd ? 'flipper hidden' : 'flipper visible'}
                 onClick$={() => { navigateDirection('next', carouselRef.value) }}>
-                <i class="las la-angle-right">R</i>
+                <Icon aria-hidden="true">
+                    <InNavArrowRight/>
+                </Icon>
             </button>
 
             {store.showTabNavigation ?
