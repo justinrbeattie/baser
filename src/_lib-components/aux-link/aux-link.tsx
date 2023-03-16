@@ -1,5 +1,6 @@
 import { component$ } from '@builder.io/qwik';
-import { Link, RouteLocation } from '@builder.io/qwik-city';
+import type { RouteLocation } from '@builder.io/qwik-city';
+import { Link } from '@builder.io/qwik-city';
 import { useLocation } from '@builder.io/qwik-city';
 
 

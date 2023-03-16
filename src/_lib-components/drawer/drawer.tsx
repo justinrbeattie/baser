@@ -1,4 +1,5 @@
-import { component$, Signal, useSignal, useStylesScoped$ } from '@builder.io/qwik';
+import type { Signal} from '@builder.io/qwik';
+import { component$, useSignal, useStylesScoped$ } from '@builder.io/qwik';
 import { RouteLevelStore } from '~/routes/layout';
 import styles from './drawer.css?inline';
 
