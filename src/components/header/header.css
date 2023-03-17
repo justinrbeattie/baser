@@ -3,8 +3,7 @@ header {
   position:sticky;
   top:0;
   max-width: var(--page-width);
-}
-header {
+  z-index:99;
   display: flex;
   background: white;
   border-bottom: 10px solid var(--qwik-dark-purple);

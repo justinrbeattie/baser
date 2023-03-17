@@ -2,6 +2,7 @@ import { component$, Slot, useStore, useTask$, useVisibleTask$ } from '@builder.
 import { useLocation } from '@builder.io/qwik-city';
 import BottomNav from '~/components/bottom-nav/bottom-nav';
 import Footer from '~/components/footer/footer';
+import { Main } from '~/components/main/main';
 
 import Header from '../components/header/header';
 
@@ -41,9 +42,9 @@ export default component$(() => {
           <Slot />
         </main>
         : <><Header />
-          <main>
-            <Slot />
-          </main>
+          <Main>
+          <Slot />
+          </Main>
 
           <Footer></Footer>
 

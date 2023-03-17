@@ -1,0 +1,41 @@
+main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "main";
+}
+
+main > div {
+  width:var(--main-width);
+  min-height:var(--main-height);
+  height:100%;
+  grid-area: main;
+  z-index: 1;
+  clip-path: inset(0% 0% 0% 0%);
+  transition: all 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+.index {
+  background:green;
+}
+
+.index:empty {
+  clip-path: inset(0% 0% 0% 0%);
+}
+
+.flower {
+  background:blue;
+}
+
+.flower:empty {
+  clip-path: inset(0% 0% 0% 100%);
+}
+.todolist {
+  background:red;
+}
+
+.todolist:empty {
+  clip-path: inset(0% 0% 0% 100%);
+}

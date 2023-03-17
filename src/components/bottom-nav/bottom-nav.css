@@ -6,5 +6,6 @@ aside[bottom-nav] {
     bottom:0;
     background:red;
     max-width: var(--page-width);
+z-index:99;
   }
   
