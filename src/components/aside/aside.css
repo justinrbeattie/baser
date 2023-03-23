@@ -1,0 +1,43 @@
+.menu-wrapper {
+  --side-nav-open-width:var(--size-fluid-8) ;
+  --side-nav-closed-width:var(--size-fluid-4) ;
+  grid-template-columns: var(--side-nav-open-width) calc(var(--page-width) - var(--side-nav-closed-width));
+  grid-template-rows: 1fr;
+  top: 0;
+  height:var(--page-height);
+  position: sticky;
+  grid-column: 1;
+  grid-row: 1 / -1;
+  display: grid;
+  flex-direction: row;
+  max-width: var(--page-width);
+  overflow-y: auto;
+  z-index:9999;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  --max-clip:calc(var(--page-width) - var(--side-nav-closed-width));
+  --mid-clip:calc(120vw * (1 - var(--intersection-ratio)));
+  --min-clip:calc(var(--page-width) - var(--side-nav-open-width));
+  clip-path: inset(0vh clamp(var(--min-clip), var(--mid-clip), var(--max-clip)) 0vh 0vw round 0px 16px 16px 0px);
+  transition: clip-path .5s var(--ease-elastic-2);
+}
+
+aside {
+  grid-column: 1 / span 1;
+  grid-row:1;
+  background: orange;
+  z-index:2;
+  scroll-snap-align: start;
+  border-radius:0px 16px 16px 0px;
+}
+
+aside + div {
+  pointer-events: none;
+  grid-column: 2 / span 1;
+  grid-row:1;
+  scroll-snap-align: start;
+}
+
+
+
+

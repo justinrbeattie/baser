@@ -32,11 +32,10 @@ body {
   max-width: var(--page-width);
   grid-template-columns: 1fr;
   grid-template-rows:
-    var(--top-nav-height) auto auto var(--bottom-nav-height);
+    var(--top-nav-height) auto var(--bottom-nav-height);
   grid-template-areas:
     "header"
     "main"
-    "footer"
     "bottom-nav";
   margin: 0;
   position: relative;

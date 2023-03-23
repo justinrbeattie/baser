@@ -1,12 +1,18 @@
 import type { Signal} from '@builder.io/qwik';
+import { useVisibleTask$} from '@builder.io/qwik';
 import { component$, useSignal, useStylesScoped$ } from '@builder.io/qwik';
-import { RouteLevelStore } from '~/routes/layout';
+import type { RouteLevelStore } from '~/routes/layout';
 import styles from './drawer.css?inline';
-
+let intersectionObserver: IntersectionObserver | undefined = undefined;
 export const Drawer = component$((props: { store: RouteLevelStore }) => {
   useStylesScoped$(styles);
   const dialogRef = useSignal<Element>();
   const iframeRef = useSignal<Element>();
+  useVisibleTask$(() => {
+    return () => {
+       intersectionObserver?.disconnect();
+      }
+});
 
   if (props.store?.l1.url) {
     return (
@@ -47,7 +53,7 @@ const iframeLoad = (store: RouteLevelStore, dialogRef: Signal<Element | undefine
 
 
 const intersectionObserverInit = (store: RouteLevelStore, element: HTMLElement) => {
-  const intersectionObserver = new IntersectionObserver(
+  intersectionObserver = new IntersectionObserver(
     (entries) => { intersectionObserverCallback(store, entries) },
     {
       root: this,
