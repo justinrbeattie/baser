@@ -18,8 +18,7 @@
   --page-height: 100vh;
   --top-nav-height: clamp(2.5rem, 8vh, 4rem);
   --bottom-nav-height: clamp(2.5rem, 8vh, 4rem);
-  --main-width: 100vw;
-  --main-height: calc(var(--page-height) - (var(--top-nav-height) + var(--bottom-nav-height)));
+  --viewport-height: calc(var(--page-height) - (var(--top-nav-height) + var(--bottom-nav-height)));
 
 }
 

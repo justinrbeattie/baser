@@ -7,7 +7,6 @@ import {
   z,
   Form,
 } from '@builder.io/qwik-city';
-
 interface ListItem {
   text: string;
 }
@@ -35,7 +34,7 @@ export default component$(() => {
   const action = useAddToListAction();
 
   return (
-    <>
+      <div>
       <h1>Form Action TODO list</h1>
       <ul>
         {list.value.map((item) => (
@@ -47,7 +46,7 @@ export default component$(() => {
         <button type="submit">Add item</button>
       </Form>
       <p>This little app works even when JavaScript is disabled.</p>
-    </>
+      </div>
   );
 });
 

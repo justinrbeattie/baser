@@ -1,0 +1,25 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: var(--page-width);
+  --page-grid-gap: var(--size-fluid-1);
+  --page-grid-rows: 10;
+  --page-grid-row-gutter-height: calc(var(--page-grid-gap) * (var(--page-grid-rows) + 3));
+  --page-grid-row-height: max(4rem,calc((var(--viewport-height) - var(--page-grid-row-gutter-height)) / 10));
+  --page-grid-gutter-x: clamp(1rem, 5vw, 10rem);
+  --page-grid-gutter-y: var(--page-grid-gap);
+  --page-grid-template-columns: [left-gutter] var(--page-grid-gutter-x) [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col] 1fr [col right-gutter] var(--page-grid-gutter-x);
+  --page-grid--template-rows: [top-gutter] var(--page-grid-gutter-y) repeat(var(--page-grid-rows), [row] var(--page-grid-row-height)) [bottom-gutter] var(--page-grid-gutter-y);
+
+}
+
+section .content {
+  display: grid;
+  position: relative;
+  grid-template-columns: var(--page-grid-template-columns);
+  grid-template-rows: var(--page-grid--template-rows);
+  gap: var(--page-grid-gap);
+  width: inherit;
+}

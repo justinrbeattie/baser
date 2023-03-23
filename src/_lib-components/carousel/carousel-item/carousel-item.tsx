@@ -12,6 +12,9 @@ export const CarouselItem = component$((props: { store: CarouselItemStore }) => 
         if (element) {
             intersectionObserverInit(element, props.store);
         }
+        return () => {
+           intersectionObserver?.disconnect();
+          }
     });
 
     return (
