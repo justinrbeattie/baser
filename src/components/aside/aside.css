@@ -53,7 +53,7 @@ button {
   background:transparent;
   border-color:transparent;
   position: fixed;
-  top:calc(var(--top-nav-height) * -1 );
+  top:0;
   left:0;
   outline-color:transparent;
   pointer-events: auto;
