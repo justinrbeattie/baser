@@ -45,7 +45,7 @@ const iframeLoad = (store: RouteLevelStore, dialogRef: Signal<Element | undefine
   if (dialog && iframe) {
     console.log(store);
     dialog.show();
-    setTimeout(() => { dialog.scrollIntoView() }, 0);
+    setTimeout(() => { dialog.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" }) }, 0);
     intersectionObserverInit(store, iframe);
   }
 }

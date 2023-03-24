@@ -1,34 +1,43 @@
-.menu-wrapper {
-  --side-nav-open-width:var(--size-fluid-8) ;
-  --side-nav-closed-width:var(--size-fluid-4) ;
-  grid-template-columns: var(--side-nav-open-width) calc(var(--page-width) - var(--side-nav-closed-width));
-  grid-template-rows: 1fr;
-  top: 0;
-  height:var(--page-height);
+.side-nav-wrapper {
+  grid-area: main;
+  top: var(--top-nav-height);
+  width:var(--page-width);
+  height:var(--viewport-height);
   position: sticky;
-  grid-column: 1;
-  grid-row: 1 / -1;
-  display: grid;
-  flex-direction: row;
-  max-width: var(--page-width);
-  overflow-y: auto;
+  display:flex;
+  pointer-events: none;
+  background:rgba(0,0,0,calc(.25 * var(--intersection-ratio)));
+  backdrop-filter:  saturate(calc(100% * (1 - var(--intersection-ratio))));
+  filter: drop-shadow(0 0 0.75rem rgba(0,0,0,0.25));
+  pointer-events: none;
   z-index:9999;
+}
+
+.open {
+  pointer-events: auto;
+}
+
+.side-nav {
+  --side-nav-open-width:var(--size-fluid-8) ;
+  --side-nav-radius: calc(1rem * var(--intersection-ratio));
+  width:inherit;
+  height:inherit;
+  grid-template-columns: var(--side-nav-open-width) var(--page-width);
+  grid-template-rows: 1fr;
+  display: grid;
+  overflow-y: auto;
+  background:red;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  --max-clip:calc(var(--page-width) - var(--side-nav-closed-width));
-  --mid-clip:calc(120vw * (1 - var(--intersection-ratio)));
-  --min-clip:calc(var(--page-width) - var(--side-nav-open-width));
-  clip-path: inset(0vh clamp(var(--min-clip), var(--mid-clip), var(--max-clip)) 0vh 0vw round 0px 16px 16px 0px);
-  transition: clip-path .5s var(--ease-elastic-2);
+  clip-path: inset(0vh calc(100vw - var(--bounding-rect-right)) 0vh 0vw round 0px var(--side-nav-radius) var(--side-nav-radius)  0px);
+  pointer-events: auto;
 }
 
 aside {
   grid-column: 1 / span 1;
   grid-row:1;
-  background: orange;
   z-index:2;
   scroll-snap-align: start;
-  border-radius:0px 16px 16px 0px;
+  border-radius:0px var(--side-nav-radius) var(--side-nav-radius) 0px;
 }
 
 aside + div {
@@ -38,6 +47,17 @@ aside + div {
   scroll-snap-align: start;
 }
 
+button {
+  width:var(--top-nav-height);
+  height:var(--top-nav-height);
+  background:transparent;
+  border-color:transparent;
+  position: fixed;
+  top:calc(var(--top-nav-height) * -1 );
+  left:0;
+  outline-color:transparent;
+  pointer-events: auto;
+}
 
 
 

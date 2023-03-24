@@ -40,13 +40,25 @@ body {
   margin: 0;
   position: relative;
   padding: 0;
-  background-color:var(--surface-1);
+  background-color: var(--surface-1);
 }
 
 a {
-  padding:unset;
-  margin:unset;
+  padding: unset;
+  margin: unset;
 }
+
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
 
 
 :focus-visible {
