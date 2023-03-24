@@ -1,6 +1,6 @@
 .side-nav-wrapper {
   grid-area: main;
-  top: var(--top-nav-height);
+  top: 0px;
   width:var(--page-width);
   height:var(--viewport-height);
   position: sticky;
