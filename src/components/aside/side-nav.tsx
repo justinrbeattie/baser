@@ -9,6 +9,7 @@ export const SideNav = component$(() => {
     const store = useStore<AsideStore>({
         visible: false,
         open: false,
+        closed: true,
         intersectionRatio: 0,
         boundingRectRight: '',
     });
@@ -54,7 +55,7 @@ export const SideNav = component$(() => {
 
             <div class={store.open ? 'side-nav-wrapper open' : 'side-nav-wrapper'}
                 onClick$={() => { toggleMenu(store, asideRef) }}
-                style={`--intersection-ratio: ${store.intersectionRatio}; --bounding-rect-right:${store.boundingRectRight}; opacity:${store.visible ? '1' : '0'};`}>
+                style={`--intersection-ratio: ${store.intersectionRatio}; --bounding-rect-right:${store.boundingRectRight}; opacity:${store.visible ? '1' : '0'};  z-index:${store.closed? -100 : 4 };`}>
                 <div class="side-nav no-scrollbar">
                     <aside ref={asideRef} >
                         aaa
@@ -86,6 +87,7 @@ const intersectionObserverInit = (element: HTMLElement, store: AsideStore) => {
 const _intersectionCallback = (entries: IntersectionObserverEntry[], store: AsideStore) => {
     entries.forEach((entry) => {
         store.open = entry.intersectionRatio === 1;
+        store.closed = entry.intersectionRatio === 0;
         store.intersectionRatio = Math.round((entry.intersectionRatio + Number.EPSILON) * 100) / 100;
         store.boundingRectRight = entry.boundingClientRect.right + 'px';
 
@@ -106,6 +108,7 @@ const toggleMenu = (store: AsideStore, asideRef: Signal<HTMLElement | undefined>
 export interface AsideStore {
     visible: boolean;
     open: boolean;
+    closed:boolean;
     intersectionRatio: number;
     boundingRectRight: string;
 }
