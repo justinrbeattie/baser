@@ -8,5 +8,6 @@ aside[bottom-nav] {
     box-shadow: var(--shadow-2);
     max-width: var(--page-width);
     z-index:var(--layer-5);
+    border-top: var(--border-size-1) solid var(--surface-3);
   }
   

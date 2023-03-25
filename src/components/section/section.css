@@ -23,3 +23,12 @@ section .content {
   gap: var(--page-grid-gap);
   width: inherit;
 }
+
+section .sentinel {
+background:orange;
+border:1px dashed black;
+position:absolute;
+width:100vw;
+height:var(--viewport-height);
+z-index:-99;
+}

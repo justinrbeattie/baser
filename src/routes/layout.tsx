@@ -1,6 +1,6 @@
 import { component$, Slot, useStore, useTask$, useVisibleTask$ } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
-import { SideNav } from '~/components/aside/side-nav';
+import { SideNav } from '~/components/side-nav/side-nav';
 import BottomNav from '~/components/bottom-nav/bottom-nav';
 import Footer from '~/components/footer/footer';
 import { Main } from '~/components/main/main';
