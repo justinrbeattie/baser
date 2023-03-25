@@ -1,0 +1,96 @@
+.side-nav-wrapper {
+  --side-nav-open-width: var(--size-fluid-9);
+  grid-area: main;
+  top: var(--top-nav-height);
+  width: var(--page-width);
+  height: var(--viewport-height);
+  position: sticky;
+  display: flex;
+  pointer-events: none;
+  background: rgba(0, 0, 0, calc(.5 * var(--intersection-ratio)));
+  backdrop-filter: saturate(calc(100% * (1 - var(--intersection-ratio))));
+  filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+  z-index: var(--layer-4);
+  opacity: 0;
+}
+
+.side-nav-wrapper.open {
+  pointer-events: auto;
+}
+
+.side-nav {
+  width: inherit;
+  height: inherit;
+  grid-template-columns: var(--side-nav-open-width) var(--page-width);
+  grid-template-rows: 1fr;
+  display: grid;
+  overflow-y: auto;
+  scroll-snap-type: x mandatory;
+  clip-path: inset(0vh calc(100vw - var(--bounding-rect-right)) 0vh 0vw);
+  pointer-events: auto;
+}
+
+aside {
+  grid-column: 1 / span 1;
+  grid-row: 1;
+  z-index: 2;
+  scroll-snap-align: start;
+  background: var(--surface-2);
+  box-shadow: var(--inner-shadow-4);
+}
+
+aside+div {
+  pointer-events: none;
+  grid-column: 2 / span 1;
+  grid-row: 1;
+  scroll-snap-align: start;
+}
+
+
+button {
+  width: calc(var(--top-nav-height) * .8);
+  height: calc(var(--top-nav-height) * .8);
+  background: transparent;
+  border-color: transparent;
+  position: fixed;
+  top: calc(var(--top-nav-height) * .1);
+  left: calc(var(--top-nav-height) * .1);
+  pointer-events: auto;
+  z-index: var(--layer-5);
+}
+
+
+svg,
+svg g {
+  min-width: calc(var(--top-nav-height) * .4);
+  min-height: calc(var(--top-nav-height) * .4);
+}
+
+/* Animate menu icon (lines). */
+svg rect {
+  opacity: 1;
+  transform: rotate(0) translateY(0) translateX(0);
+  transform-origin: center;
+}
+
+svg rect:first-child {
+  transform: rotate(calc(45deg * var(--intersection-ratio))) translateY(calc(25px * var(--intersection-ratio))) translateX(0);
+}
+
+svg rect:nth-child(2) {
+  opacity: calc(1 - var(--intersection-ratio));
+}
+
+ svg rect:last-child {
+  transform: rotate(calc(-45deg * var(--intersection-ratio))) translateY(calc(-25px * var(--intersection-ratio))) translateX(0);
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}

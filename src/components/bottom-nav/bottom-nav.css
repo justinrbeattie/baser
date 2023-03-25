@@ -4,8 +4,9 @@ aside[bottom-nav] {
     flex-direction: column;
     position:sticky;
     bottom:0;
-    background:red;
+    background:var(--surface-1);
+    box-shadow: var(--shadow-2);
     max-width: var(--page-width);
-z-index:99;
+    z-index:var(--layer-5);
   }
   

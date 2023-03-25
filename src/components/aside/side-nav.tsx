@@ -1,22 +1,25 @@
-import { component$, Signal, useSignal, useStore, useStylesScoped$, useVisibleTask$ } from '@builder.io/qwik';
-import { Icon } from '~/_lib-components/icon/icon';
-import styles from './aside.css?inline';
+import type { Signal } from '@builder.io/qwik';
+import { component$, useSignal, useStore, useStylesScoped$, useVisibleTask$ } from '@builder.io/qwik';
+import styles from './side-nav.css?inline';
 
 let intersectionObserver: IntersectionObserver | undefined = undefined;
 
-export const Aside = component$(() => {
+export const SideNav = component$(() => {
     useStylesScoped$(styles);
     const store = useStore<AsideStore>({
+        visible: false,
         open: false,
         intersectionRatio: 0,
         boundingRectRight: '',
     });
+
     const asideRef = useSignal<HTMLElement>();
     useVisibleTask$(() => {
         const element = asideRef.value as HTMLElement;
         if (element && element.parentElement) {
             element.nextElementSibling?.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
             intersectionObserverInit(element, store);
+            store.visible = true;
         }
         return () => {
             intersectionObserver?.disconnect();
@@ -25,29 +28,44 @@ export const Aside = component$(() => {
 
 
     return (
-        <div class='side-nav-wrapper'
-        data-open={store.open}
-           onClick$={() => { toggleMenu(store, asideRef) }}
-        style={`--intersection-ratio: ${store.intersectionRatio}; --bounding-rect-right:${store.boundingRectRight}; `}>
+        <>
+
+
             <button
                 type="button"
                 title="Navigation Menu"
                 aria-label="Navigation Menu"
-                onClick$={() => { toggleMenu(store, asideRef) }}>
-                <Icon aria-hidden="true">
-                    <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor">
-                        <path d="M3 5h18M3 12h18M3 19h18" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                </Icon>
+                aria-expanded={store.open ? true : false}
+                onClick$={() => { toggleMenu(store, asideRef) }}
+                class={store.open ? 'menu-toggle open' : 'menu-toggle'}
+                id="menu-toggle"
+                style={`--intersection-ratio: ${store.intersectionRatio};`}
+            >
+                <span class="screen-reader-text">Menu</span>
+                <svg class="icon icon-menu-toggle" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100">
+
+                    <rect x="10" y="20" width="80" height="10"></rect>
+                    <rect x="10" y="45" width="80" height="10"></rect>
+                    <rect x="10" y="70" width="80" height="10"></rect>
+
+                </svg>
             </button>
-            <div class="side-nav no-scrollbar">
-                <aside ref={asideRef} >
-                    aaa
-                </aside>
-                <div>
+
+
+            <div class={store.open ? 'side-nav-wrapper open' : 'side-nav-wrapper'}
+                onClick$={() => { toggleMenu(store, asideRef) }}
+                style={`--intersection-ratio: ${store.intersectionRatio}; --bounding-rect-right:${store.boundingRectRight}; opacity:${store.visible ? '1' : '0'};`}>
+                <div class="side-nav no-scrollbar">
+                    <aside ref={asideRef} >
+                        aaa
+                    </aside>
+                    <div>
+                    </div>
                 </div>
             </div>
-        </div>
+
+        </>
+
     );
 });
 
@@ -76,7 +94,7 @@ const _intersectionCallback = (entries: IntersectionObserverEntry[], store: Asid
 };
 
 const toggleMenu = (store: AsideStore, asideRef: Signal<HTMLElement | undefined>) => {
-    if(store.open && asideRef.value) {
+    if (store.open && asideRef.value) {
         asideRef.value.nextElementSibling?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     } else {
         asideRef.value?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -86,6 +104,7 @@ const toggleMenu = (store: AsideStore, asideRef: Signal<HTMLElement | undefined>
 
 
 export interface AsideStore {
+    visible: boolean;
     open: boolean;
     intersectionRatio: number;
     boundingRectRight: string;

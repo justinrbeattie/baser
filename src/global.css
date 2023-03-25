@@ -65,3 +65,8 @@ a {
   outline-color: var(--brand, var(--link));
   outline-offset: 1px;
 }
+
+
+html:has(.side-nav-wrapper.open) {
+  overflow: hidden;
+}
