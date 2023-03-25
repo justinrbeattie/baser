@@ -30,8 +30,6 @@ export const SideNav = component$(() => {
 
     return (
         <>
-
-
             <button
                 type="button"
                 title="Navigation Menu"
