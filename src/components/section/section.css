@@ -1,4 +1,4 @@
-section {
+.page-section {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,20 +15,29 @@ section {
 
 }
 
-section .content {
+.page-section .content {
   display: grid;
   position: relative;
   grid-template-columns: var(--page-grid-template-columns);
   grid-template-rows: var(--page-grid--template-rows);
+  grid-auto-rows: var(--page-grid-row-height);
   gap: var(--page-grid-gap);
   width: inherit;
 }
 
-section .sentinel {
-background:orange;
-border:1px dashed black;
-position:absolute;
-width:100vw;
-height:var(--viewport-height);
-z-index:-99;
+.sentinel-wrapper {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  z-index: -999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+}
+
+.sentinel {
+  width: 1px;
+  height: var(--page-height);
 }

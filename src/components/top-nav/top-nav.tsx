@@ -1,7 +1,7 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
-import styles from './header.css?inline';
+import styles from './top-nav.css?inline';
 
-export default component$(() => {
+export const TopNav = component$(() => {
   useStylesScoped$(styles);
 
   return (

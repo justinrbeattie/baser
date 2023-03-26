@@ -4,9 +4,7 @@ import { SideNav } from '~/components/side-nav/side-nav';
 import BottomNav from '~/components/bottom-nav/bottom-nav';
 import Footer from '~/components/footer/footer';
 import { Main } from '~/components/main/main';
-
-import Header from '../components/header/header';
-
+import { TopNav } from '~/components/top-nav/top-nav';
 
 
 
@@ -42,7 +40,7 @@ export default component$(() => {
         <main>
           <Slot />
         </main>
-        : <><Header />
+        : <><TopNav/>
           <SideNav></SideNav>
           <Main>
           <Slot />
