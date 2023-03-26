@@ -1,4 +1,4 @@
-import { component$, useSignal, useStore, useStylesScoped$, useTask$ } from '@builder.io/qwik';
+import { component$, Slot, useSignal, useStore, useStylesScoped$, useTask$ } from '@builder.io/qwik';
 import { CarouselItem } from './carousel-item/carousel-item';
 import styles from './carousel.css?inline';
 import { InNavArrowLeft, InNavArrowRight } from "@qwikest/icons/iconoir";
@@ -174,8 +174,10 @@ export const Carousel = component$(() => {
                 tabIndex="0"
                 aria-label={store['items-aria-label'] + ' scroll container'}
                 aria-live="polite">
-                {store.carouselItemList.map((carouselItem) =>
-                    <CarouselItem key={carouselItem.index} store={carouselItem}></CarouselItem>
+                {store.carouselItemList.map((carouselItem,i) =>
+                    <CarouselItem key={i} store={carouselItem}>
+                        <Slot name={'slide-' + i}></Slot>
+                    </CarouselItem>
 
                 )}
             </ul>
@@ -198,18 +200,17 @@ export const Carousel = component$(() => {
                             class="pagination-item"
                             type="button"
                             role="tab"
-                            id={'tab-' + (carouselItem.index + 1)}
-                            aria-controls={'tabpanel-' + (carouselItem.index + 1)}
-                            title={'Item ' + (carouselItem.index + 1) + ': ' + carouselItem['aria-label']}
+                            id={'tab-' + ((carouselItem?.index || 0) + 1)}
+                            aria-controls={'tabpanel-' + ((carouselItem?.index || 0) + 1)}
+                            title={'Item ' + ((carouselItem?.index || 0) + 1) + ': ' + carouselItem['aria-label']}
                             aria-label={carouselItem['aria-label']}
                             aria-setsize={carouselItem.totalItems}
-                            aria-posinset={carouselItem.index + 1}
+                            aria-posinset={(carouselItem?.index || 0) + 1}
                             aria-expanded={carouselItem.fullyVisible}
-                            onClick$={() => { navigateToIndex(carouselItem.index, carouselRef.value) }}
-                            /* @ts-ignore */
+                            onClick$={() => { navigateToIndex((carouselItem?.index || 0), carouselRef.value) }}
+                            /* @ts-ignore */ 
                             tabindex="-1"
                         ></button>
-
                     )}
 
                 </nav>
@@ -263,8 +264,8 @@ const trackVisible = (store: CarouselStore, carousel: Element | undefined) => {
 
         }
         const lastItemIndex = store.carouselItemList.length - 1;
-        store.scrolledToStart = store.carouselItemList[0].firstFullyVisible;
-        store.scrolledToEnd = store.carouselItemList[lastItemIndex].lastFullyVisible;
+        store.scrolledToStart = store.carouselItemList[0].firstFullyVisible || false;
+        store.scrolledToEnd = store.carouselItemList[lastItemIndex].lastFullyVisible || false;
     }
 
 }
@@ -312,3 +313,4 @@ export interface CarouselItemStore {
     totalItems: number;
     scrollPercentage: number;
 }
+

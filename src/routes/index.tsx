@@ -11,6 +11,11 @@ export default component$(() => {
       <Header tag="header">
 
         <div style="background:blue; grid-column:col 1 / span 12; grid-row:row 1 / span 10; ">
+        <Carousel>
+          <div style="color:red;" q:slot='slide-1'>slide 1</div>
+          <div style="color:red;" q:slot='slide-2'>slide 2</div>
+          </Carousel>
+
         </div>
 
       </Header>
@@ -247,7 +252,6 @@ export default component$(() => {
             TODO demo 📝
           </Link>
 
-          <Carousel></Carousel>
 
 
 

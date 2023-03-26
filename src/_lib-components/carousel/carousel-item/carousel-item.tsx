@@ -1,4 +1,4 @@
-import { component$, useVisibleTask$, useSignal, useStylesScoped$ } from '@builder.io/qwik';
+import { component$, useVisibleTask$, useSignal, useStylesScoped$, Slot } from '@builder.io/qwik';
 import type { CarouselItemStore } from '../carousel';
 import styles from './carousel-item.css?inline';
 
@@ -13,22 +13,21 @@ export const CarouselItem = component$((props: { store: CarouselItemStore }) => 
             intersectionObserverInit(element, props.store);
         }
         return () => {
-           intersectionObserver?.disconnect();
-          }
+            intersectionObserver?.disconnect();
+        }
     });
 
     return (
         /* @ts-ignore */
         <li ref={carouselItemRef} inert={props.store.notVisible}
-            aria-label={(props.store.index + 1) + ' of ' + props.store.totalItems}
+            aria-label={((props.store.index || 0) + 1) + ' of ' + props.store.totalItems}
             aria-roledescription={props.store['aria-roledescription']}
             /* @ts-ignore */
             tabIndex="0"
             style={'--scroll-percentage:' + props.store.scrollPercentage + ';'}
         >
-            <div id={'tabpanel-' + (props.store.index + 1)} role="tabpanel" aria-labelledby={'tab-' + (props.store.index + 1)} >SLIDE {props.store.index}
-
-
+            <div id={'tabpanel-' + ((props.store.index || 0) + 1)} role="tabpanel" aria-labelledby={'tab-' + ((props.store.index || 0) + 1)} >
+                <Slot></Slot>
             </div>
         </li>
 
