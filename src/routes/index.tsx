@@ -1,7 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import { Link } from '@builder.io/qwik-city';
-import { Header, Section } from '~/components/section/section';
+import { Header } from '~/components/section/section';
 
 import { Carousel } from '~/_lib-components/carousel/carousel';
 import { CarouselSlide } from '~/_lib-components/carousel/carousel-slide/carousel-slide';
