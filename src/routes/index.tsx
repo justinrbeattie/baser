@@ -4,27 +4,51 @@ import { Link } from '@builder.io/qwik-city';
 import { Header, Section } from '~/components/section/section';
 
 import { Carousel } from '~/_lib-components/carousel/carousel';
+import { CarouselSlide } from '~/_lib-components/carousel/carousel-slide/carousel-slide';
 
 export default component$(() => {
   return (
     <>
       <Header tag="header">
 
-        <div style="background:blue; grid-column:col 1 / span 12; grid-row:row 1 / span 10; ">
-        <Carousel>
-          <div style="color:red;" q:slot='slide-1'>slide 1</div>
-          <div style="color:red;" q:slot='slide-2'>slide 2</div>
+        <div style="background:white; grid-column:col 1 / span 12; grid-row:row 1 / span 10; ">
+          <Carousel aria-label='Featured Items Carousel' numberOfSlides={8}>
+            <CarouselSlide q:slot='slide-1' aria-roledescription='item 1'>
+              <div style="width:400px; height:400px;">slide 1</div>
+            </CarouselSlide>
+            <CarouselSlide q:slot='slide-2' aria-roledescription='item 2'>
+              <div style="width:500px; height:400px;">slide 2</div>
+            </CarouselSlide>
+            <CarouselSlide q:slot='slide-3' aria-roledescription='item 3'>
+              <div style="width:500px; height:400px;">slide 3</div>
+            </CarouselSlide>
+            <CarouselSlide q:slot='slide-4' aria-roledescription='item 4'>
+              <div style="width:500px; height:400px;">slide 4</div>
+            </CarouselSlide>
+            <CarouselSlide q:slot='slide-5' aria-roledescription='item 5'>
+              <div style="width:500px; height:400px;">slide 5</div>
+            </CarouselSlide>
+            <CarouselSlide q:slot='slide-6' aria-roledescription='item 6'>
+              <div style="width:500px; height:400px;">slide 6</div>
+            </CarouselSlide>
+            <CarouselSlide q:slot='slide-7' aria-roledescription='item 7'>
+              <div style="width:500px; height:400px;">slide 7</div>
+            </CarouselSlide>
+            <CarouselSlide q:slot='slide-8' aria-roledescription='item 8'>
+              <div style="width:500px; height:400px;">slide 8</div>
+            </CarouselSlide>
           </Carousel>
 
         </div>
 
       </Header>
 
-      <Section>
+{/*       <Section>
 
-        <div style="background:green ; grid-column:col 1 / span 12; grid-row:row 1 / span 30; ">
+        <div style="background:white; grid-column:col 1 / span 12; grid-row:row 1 / span 30; ">
 
-          <h1>
+
+          <h1 class="abc">
             Welcome to Qwik <span class="lightning">⚡️</span>
           </h1>
 
@@ -257,7 +281,7 @@ export default component$(() => {
 
         </div>
 
-      </Section>
+      </Section> */}
     </>
   );
 });

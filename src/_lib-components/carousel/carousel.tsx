@@ -1,162 +1,51 @@
-import { component$, Slot, useSignal, useStore, useStylesScoped$, useTask$ } from '@builder.io/qwik';
+import { component$, Slot, useSignal, useStore, useStylesScoped$, useTask$, useVisibleTask$ } from '@builder.io/qwik';
 import { CarouselItem } from './carousel-item/carousel-item';
 import styles from './carousel.css?inline';
 import { InNavArrowLeft, InNavArrowRight } from "@qwikest/icons/iconoir";
 import { Icon } from '../icon/icon';
 
 
-export const Carousel = component$(() => {
+export const Carousel = component$((props:CarouselProps) => {
     const carouselRef = useSignal<Element>();
     const store = useStore<CarouselStore>({
-        'aria-label': 'Featured Items Carousel',
-        'items-aria-label': 'Items',
-        defaultItemWidth: '400px',
-        defaultItemHeight: '500px',
+        'aria-label': props['aria-label'],
+        showTabNavigation: props['showTabNavigation'] || true,
         scrolledToStart: true,
         scrolledToEnd: false,
-        scrollTimelineTracking: true,
-        showTabNavigation: true,
-        carouselItemList: [
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 0,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 1,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 2,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 3,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 4,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 5,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 6,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 7,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            },
-            {
-                'aria-label': 'item',
-                'aria-roledescription': 'item',
-                index: 8,
-                intersectionRatio: 0,
-                fullyVisible: false,
-                firstFullyVisible: false,
-                lastFullyVisible: false,
-                partiallyVisible: false,
-                notVisible: false,
-                totalItems: 9,
-                scrollPercentage: 0,
-            }
-        ]
+        carouselItemList: []
     }, { recursive: true });
     useStylesScoped$(styles);
-    useTask$(({ track }) => {
-        if (store.scrollTimelineTracking) {
-            track(() => store.carouselItemList.map(item => item.intersectionRatio));
-            trackVisible(store, carouselRef.value);
-            scrollTimelineTracking(store, carouselRef.value);
-        } else {
-            track(() => store.carouselItemList.map(item => item.fullyVisible));
-            trackVisible(store, carouselRef.value);
-            scrollTimelineTracking(store, carouselRef.value);
-        }
+    useVisibleTask$(() => {
+        const slides = (props.numberOfSlides - 1);
+        if (slides) {
+            for (let i = 0; i <= slides; i++) {
+                store.carouselItemList.push(
+                    {
+                        index: i,
+                        intersectionRatio: 0,
+                        fullyVisible: false,
+                        firstFullyVisible: false,
+                        lastFullyVisible: false,
+                        partiallyVisible: false,
+                        notVisible: false,
+                        totalItems: slides,
+                        scrollPercentage: 0,
+                    }
+                );
+            }
 
+        }
+    });
+    useTask$(({ track }) => {
+        track(() => store.carouselItemList.map(item => item.intersectionRatio));
+        trackVisible(store, carouselRef.value);
+        scrollTimelineTracking(store, carouselRef.value);
     });
 
 
     return (
         <div class="carousel" ref={carouselRef}
             aria-label={store['aria-label']}
-
-
-            style={'--default-item-width:' + store.defaultItemWidth + ';' + '--default-item-height:' + store.defaultItemHeight + ';'}
         >
             <button
                 type="button"
@@ -165,18 +54,18 @@ export const Carousel = component$(() => {
                 disabled={store.scrolledToStart}
                 class={store.scrolledToStart ? 'flipper hidden' : 'flipper visible'}
                 onClick$={() => { navigateDirection('previous', carouselRef.value); }}>
-                          <Icon aria-hidden="true">
-                    <InNavArrowLeft/>
+                <Icon aria-hidden="true">
+                    <InNavArrowLeft />
                 </Icon>
             </button>
             <ul class="scroll-container"
                 /* @ts-ignore */
                 tabIndex="0"
-                aria-label={store['items-aria-label'] + ' scroll container'}
+                aria-label={'Items scroll container'}
                 aria-live="polite">
-                {store.carouselItemList.map((carouselItem,i) =>
+                {store.carouselItemList.map((carouselItem, i) =>
                     <CarouselItem key={i} store={carouselItem}>
-                        <Slot name={'slide-' + i}></Slot>
+                        <Slot name={'slide-' + (i + 1)}></Slot>
                     </CarouselItem>
 
                 )}
@@ -189,7 +78,7 @@ export const Carousel = component$(() => {
                 class={store.scrolledToEnd ? 'flipper hidden' : 'flipper visible'}
                 onClick$={() => { navigateDirection('next', carouselRef.value) }}>
                 <Icon aria-hidden="true">
-                    <InNavArrowRight/>
+                    <InNavArrowRight />
                 </Icon>
             </button>
 
@@ -202,13 +91,13 @@ export const Carousel = component$(() => {
                             role="tab"
                             id={'tab-' + ((carouselItem?.index || 0) + 1)}
                             aria-controls={'tabpanel-' + ((carouselItem?.index || 0) + 1)}
-                            title={'Item ' + ((carouselItem?.index || 0) + 1) + ': ' + carouselItem['aria-label']}
-                            aria-label={carouselItem['aria-label']}
+                            title={'Navigation Item ' + ((carouselItem?.index || 0) + 1)}
+                            aria-label='Navigation Item'
                             aria-setsize={carouselItem.totalItems}
                             aria-posinset={(carouselItem?.index || 0) + 1}
                             aria-expanded={carouselItem.fullyVisible}
                             onClick$={() => { navigateToIndex((carouselItem?.index || 0), carouselRef.value) }}
-                            /* @ts-ignore */ 
+                            /* @ts-ignore */
                             tabindex="-1"
                         ></button>
                     )}
@@ -288,21 +177,20 @@ const scrollTimelineTracking = (store: CarouselStore, carousel: Element | undefi
 }
 
 
+export interface CarouselProps {
+    'aria-label': string;
+    numberOfSlides: number;
+    showTabNavigation?: boolean;
+}
 export interface CarouselStore {
     'aria-label': string;
-    'items-aria-label': string;
+    showTabNavigation: boolean;
     scrolledToStart: boolean;
     scrolledToEnd: boolean;
     carouselItemList: CarouselItemStore[];
-    defaultItemWidth: string;
-    defaultItemHeight: string;
-    scrollTimelineTracking: boolean;
-    showTabNavigation: boolean;
 }
 
 export interface CarouselItemStore {
-    'aria-roledescription': 'item',
-    'aria-label': string;
     index: number;
     intersectionRatio: number;
     fullyVisible: boolean;

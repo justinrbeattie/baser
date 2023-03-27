@@ -1,29 +1,29 @@
+.carousel>ul>li {
+  position: relative;
+  scroll-snap-align: start;
+  display: flex;
+  flex: 0 0 auto;
+  scroll-margin: 0 var(--size-fluid-4);
+  padding: 0;
+  max-width: 100%;
+  animation: var(--animation-fade-out) reverse backwards;
+  transition: all .25s var(--ease-elastic-1);
+}
 
- li {
-    position: relative;
-    scroll-snap-align: start;
-    display: flex;
-    flex: 0 0 auto;
-    scroll-margin: 0 var(--size-fluid-4);
-    padding: 0;
-    max-width: unset;
-    content-visibility: visible;
-    animation: var(--animation-fade-in) forwards;
-    transition: all .25s var(--ease-elastic-1);
-  }
-  
-  
- li [inert]>* {
-    content-visibility: hidden;
-  }
-  
- li > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width:calc(100vw - (var(--size-fluid-4) * 2));
-    width: min(calc(100vw - (var(--size-fluid-4) * 2)), var(--default-item-width));
-    min-height: var(--default-item-height);
-    background: var(--surface-2);
-    transition: all 0s var(--ease-elastic-1);
-  }
+.carousel>ul>li>.carousel-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  background: var(--surface-2);
+  transition: all 0s var(--ease-elastic-1);
+}
+
+.carousel>ul>li>.carousel-slide>* {
+  max-width: 100%;
+}
+
+
+.carousel>ul>li[inert]>.carousel-slide>* {
+  content-visibility: hidden;
+}
